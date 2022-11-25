@@ -1,0 +1,29 @@
+{
+  "name": "socketserver",
+  "version": "1.0.0",
+  "description": "-- start kafka   docker-compose up -- start producer  -- start consumer -- end kafka docker-compose down",
+  "main": "index.js",
+  "scripts": {
+    "start:producer": "node ./producer/index.js",
+    "start:consumer": "node ./consumer/index.js",
+    "start": "node server.js",
+    "type": "module"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "avsc": "^5.7.6",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "init": "^0.1.2",
+    "kafkajs": "^2.2.2",
+    "mongodb": "^4.11.0",
+    "node-cron": "^3.0.2",
+    "node-rdkafka": "^2.14.0",
+    "nodemailer": "^6.8.0",
+    "promise": "^8.3.0",
+    "socket.io": "^4.5.2"
+  }
+}
