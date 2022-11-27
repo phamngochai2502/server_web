@@ -1,6 +1,6 @@
 console.log('producer ...');
 import Kafka from 'node-rdkafka';
-import eventType from '../eventType.js';
+import eventType from '../model/eventType.js';
 
 const stream = Kafka.Producer.createWriteStream({
     'metadata.broker.list': 'localhost:9092'

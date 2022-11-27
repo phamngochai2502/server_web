@@ -5,7 +5,7 @@ import cron from 'node-cron';
 const lstMail = data["email"];
 
 import Kafka from 'node-rdkafka';
-import eventType from '../eventType.js';
+import eventType from '../model/eventType.js';
 
 import express from 'express';
 import { Server, Socket } from 'socket.io';
@@ -124,7 +124,7 @@ io.on('connection', (socket) => {
 });
 
 function sendData(socket, a1, a2, a3) {
-    socket.emit('data1', a1, a2, a3, a1);
+    socket.emit('data1', a1, a2, a3);
     console.log("data have been sent : " + a1 + " " + a2 + " " + a3);
     setTimeout(() => {
         sendData(socket, nhietDoS, doAmS, anhSangS);
