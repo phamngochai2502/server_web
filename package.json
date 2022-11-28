@@ -20,10 +20,12 @@
     "init": "^0.1.2",
     "kafkajs": "^2.2.2",
     "mongodb": "^4.11.0",
+    "mongoose": "^6.7.3",
     "node-cron": "^3.0.2",
     "node-rdkafka": "^2.14.0",
     "nodemailer": "^6.8.0",
     "promise": "^8.3.0",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "status": "^0.0.13"
   }
 }

@@ -13,6 +13,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import mongodb from 'mongodb';
+
+
 var MongoClient = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/";
 
@@ -27,8 +29,10 @@ app.all('/', function (req, res, next) {
 app.get('/', function (req, res, next) {
     // Handle the get for this route
 });
-app.post('/', function (req, res, next) {
+
+app.post('', function (req, res, next) {
     // Handle the post for this route
+   
 })
 const server = app.listen(3000, () => {
     console.log('ls on port 3000');
@@ -58,10 +62,14 @@ consumer.connect();
 let nhietDoS = 0;
 let doAmS = 0;
 let anhSangS = 0;
+let maxNhietDo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let maxDoAm = [1, 2, 1, 4, 5, 6, 1, 8, 9, 10];
+let maxAnhSang = [1, 2, 3, 4, 3, 6, 7, 2, 4, 6];
+
 // read data from topic
 consumer.on('ready', () => {
     console.log('consumer ready..');
-    consumer.subscribe(['test', 'test1']);
+    consumer.subscribe(['test']);
     consumer.consume();
 }).on('data', (data) => {
     console.log('consumer.on() take data from topic and sent to client use socket.io');
@@ -71,6 +79,9 @@ consumer.on('ready', () => {
     nhietDoS = jsonTake.nhietDo;
     doAmS = jsonTake.doAm;
     anhSangS = jsonTake.anhSang;
+     //set gia tri lơn nhat cung thoi gian
+     
+    //
     // send mail 
     if (nhietDoS > 45 || (doAmS < 60 || doAmS > 70) || (anhSangS < 400 || anhSangS > 700)) {
         // gửi mail cảnh báo đến mail của chủ vườn cây
@@ -120,6 +131,10 @@ consumer.on('ready', () => {
 // call function sendData(socket,nhietDo,doAm,anhSang)
 io.on('connection', (socket) => {
     console.log("connection is connected");
+    socket.on('on-chat', data =>{
+        console.log(data);
+    })
+    socket.emit('data2',maxNhietDo,maxDoAm,maxAnhSang);
     sendData(socket, nhietDoS, doAmS, anhSangS);
 });
 

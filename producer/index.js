@@ -4,7 +4,7 @@ import eventType from '../model/eventType.js';
 
 const stream = Kafka.Producer.createWriteStream({
     'metadata.broker.list': 'localhost:9092'
-}, {}, { topic: 'test', topic :'test1' });
+}, {}, { topic: 'test'});
 
 stream.on('error', (err) => {
     console.error('Error in our kafka stream');
