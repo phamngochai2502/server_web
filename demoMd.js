@@ -3,27 +3,24 @@
 import mongodb from 'mongodb';
 var MongoClient = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/";
-
+var ketqua ;
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var dbo = db.db("tutorialMongoDB");
     var myobj = [
-        { name: 'John', address: 'Highway 71' },
-        { name: 'Peter', address: 'Lowstreet 4' },
-        { name: 'Amy', address: 'Apple st 652' },
-        { name: 'Hannah', address: 'Mountain 21' },
-        { name: 'Michael', address: 'Valley 345' },
-        { name: 'Sandy', address: 'Ocean blvd 2' },
-        { name: 'Betty', address: 'Green Grass 1' },
-        { name: 'Richard', address: 'Sky st 331' },
-        { name: 'Susan', address: 'One way 98' },
-        { name: 'Vicky', address: 'Yellow Garden 2' },
-        { name: 'Ben', address: 'Park Lane 38' },
-        { name: 'William', address: 'Central st 954' },
-        { name: 'Chuck', address: 'Main Road 989' },
-        { name: 'Viola', address: 'Sideway 1633' }
+        { time: '20221129', temp: 60 , humidity : 78 , moisture : 150, tempSts : 15 , moistureSts : 10 },
+        { time: '20221128', temp: 70 , humidity : 18 , moisture : 153, tempSts : 15 , moistureSts : 10 },
+        { time: '20221127', temp: 50 , humidity : 28 , moisture : 120, tempSts : 15 , moistureSts : 10 },
+        { time: '20221126', temp: 45 , humidity : 68 , moisture : 100, tempSts : 15 , moistureSts : 10 },
+        { time: '20221125', temp: 34 , humidity : 89 , moisture : 89, tempSts : 15 , moistureSts : 10 },
+        { time: '20221124', temp: 77 , humidity : 72 , moisture : 190, tempSts : 15 , moistureSts : 10 },
+        { time: '20221123', temp: 28 , humidity : 38 , moisture : 90, tempSts : 15 , moistureSts : 10 },
+        { time: '20221122', temp: 30 , humidity : 78 , moisture : 60, tempSts : 15 , moistureSts : 10 },
+        { time: '20221121', temp: 15 , humidity : 18 , moisture : 46, tempSts : 15 , moistureSts : 10 },
+        { time: '20221120', temp: 66 , humidity : 88 , moisture : 77, tempSts : 15 , moistureSts : 10 }
+
     ];
-    //   dbo.collection("customers").insertMany(myobj, function(err, res) {
+    //   dbo.collection("BatchProcessingTest").insertMany(myobj, function(err, res) {
     //     if (err) throw err;
     //     console.log("Number of documents inserted: " + res.insertedCount);
     //     db.close();
@@ -33,13 +30,19 @@ MongoClient.connect(url, function (err, db) {
     //     console.log(result);
     //     db.close();
     // });
-    dbo.collection("customers").find({}, { projection: { _id: 1, name: 1, address: 1 } }).toArray(function (err, result) {
-        if (err) throw err;
-        for (obj in result) {
-            console.log(result[obj].name);
-            // console.log(obj);
-        }
-        // console.log(result);
-        db.close();
-    });
+
+    dbo.collection("BatchProcessingTest")
+        .find({})
+        .project({ temp: 1, humidity: 1,moisture :1 })
+        .sort({ $natural: -1 })
+        .limit(10)
+        .toArray(function (err, result) {
+            if (err) throw err;  
+            console.log(result[0].temp );
+            db.close();
+        });
+
+   
 });
+
+

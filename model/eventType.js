@@ -4,9 +4,11 @@ export default avro.Type.forSchema({
     type: 'record',
     fields:
         [
-            { name: 'id', type: 'int' },
-            { name: 'nhietDo', type: 'int' },
-            { name: 'doAm', type: 'int' },
-            { name: 'anhSang', type: 'int' }
+            { name: 'time', type: 'string' },
+            { name: 'temp', type: 'double' },
+            { name: 'humidity', type: 'double' },
+            { name: 'moisture', type: 'double' },
+            { name: 'moistureSts', type: 'int' },
+            { name: 'tempSts', type: 'int' }
         ]
 });

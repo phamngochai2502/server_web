@@ -12,14 +12,21 @@ stream.on('error', (err) => {
 });
 
 function queueRandomMessage() {
-    const encodedValue =
+    var today = new Date();
+    var time = today.getTime().toString();
+ // Math.round(num * 100) / 100
+   const encodedValue =
     {
-        "id": Math.floor(Math.random() * 10000),
-        "nhietDo": Math.floor(Math.random() * 60),
-        "doAm": Math.floor(Math.random() * 100),
-        "anhSang": Math.floor(Math.random() * 800)
+        "time": time,
+        "temp": Math.round((Math.random() * 60.0) * 100)/100,
+        "humidity": Math.round((Math.random() * 100.0) * 100)/100,
+        "moisture": Math.round((Math.random() * 150.0) * 100)/100,
+        "moistureSts": Math.floor(Math.random() * 2),
+        "tempSts": Math.floor(Math.random() * 2)
     };
-    const success = stream.write(eventType.toBuffer(encodedValue));
+    console.log("encodedValue = "+JSON.stringify(encodedValue))
+    // const success = stream.write(eventType.toBuffer(encodedValue));
+    const success = stream.write(Buffer.from(JSON.stringify(encodedValue)));
     if (success) {
         console.log('write success ');
     } else {
